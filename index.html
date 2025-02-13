@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walentynka</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: pink;
+            overflow: hidden;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s;
+        }
+        .heart {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: relative;
+            transform: rotate(-45deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s;
+            margin-bottom: 40px; /* Zwiększony margines */
+        }
+        .heart::before, .heart::after {
+            content: '';
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 0;
+            transition: background-color 0.5s;
+        }
+        .heart::before {
+            top: -100px;
+            left: 0;
+        }
+        .heart::after {
+            left: 100px;
+            top: 0;
+        }
+        .text {
+            position: absolute;
+            width: 80%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            transform: rotate(45deg);
+            line-height: 1.2;
+            z-index: 1;
+        }
+        .buttons {
+            margin-top: 30px; /* Zwiększony margines */
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .yes {
+            background-color: red;
+            color: white;
+        }
+        .no {
+            background-color: black;
+            color: white;
+        }
+        .heart-broken::before, .heart-broken::after, .heart-broken {
+            background-color: black !important;
+        }
+        .heart-fall, .cry-fall {
+            position: absolute;
+            font-size: 24px;
+            animation: fall 3s linear infinite;
+        }
+        .heart-fall {
+            color: red;
+        }
+        .cry-fall {
+            color: blue;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) scale(1); }
+            100% { transform: translateY(100vh) scale(0.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart" id="heart">
+        <div class="text" id="question">Czy zostaniesz moją Walentynką?</div>
+    </div>
+    <div class="buttons" id="buttons">
+        <button class="btn yes" onclick="startHearts()">Tak!</button>
+        <button class="btn no" onclick="confirmNo()">Nie</button>
+    </div>
+    <script>
+        function startHearts() {
+            document.body.style.backgroundColor = "pink";
+            document.getElementById("heart").classList.remove("heart-broken");
+            document.getElementById("question").innerText = "Czy zostaniesz moją Walentynką?";
+            // Ukrywanie przycisków
+            document.getElementById("buttons").style.display = "none";
+
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart-fall");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+
+        function confirmNo() {
+            document.getElementById("question").innerText = "Czy na pewno?";
+            document.getElementById("buttons").innerHTML = '<button class="btn yes" onclick="startHearts()">Tak!</button> <button class="btn no" onclick="breakHeart()">Tak, na pewno</button>';
+        }
+
+        function breakHeart() {
+            document.body.style.backgroundColor = "black";
+            document.getElementById("heart").classList.add("heart-broken");
+            document.getElementById("question").innerText = "💔";
+            // Ukrywanie przycisków
+            document.getElementById("buttons").style.display = "none";
+
+            for (let i = 0; i < 20; i++) {
+                let tear = document.createElement("div");
+                tear.innerHTML = "😭";
+                tear.classList.add("cry-fall");
+                tear.style.left = Math.random() * 100 + "vw";
+                tear.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(tear);
+                setTimeout(() => tear.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
