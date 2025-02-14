@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@
             justify-content: center;
             align-items: center;
             transition: background-color 0.5s;
-            margin-bottom: 40px; /* Zwiększony margines */
+            margin-bottom: 40px; 
         }
         .heart::before, .heart::after {
             content: '';
@@ -57,7 +57,7 @@
             z-index: 1;
         }
         .buttons {
-            margin-top: 30px; /* Zwiększony margines */
+            margin-top: 30px; 
         }
         .btn {
             padding: 10px 20px;
@@ -108,7 +108,7 @@
             document.body.style.backgroundColor = "pink";
             document.getElementById("heart").classList.remove("heart-broken");
             document.getElementById("question").innerText = "Czy zostaniesz moją Walentynką?";
-            // Ukrywanie przycisków
+
             document.getElementById("buttons").style.display = "none";
 
             for (let i = 0; i < 20; i++) {
@@ -120,18 +120,20 @@
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 3000);
             }
+            
+            document.getElementById("question").innerText = "Wesołych walentynek od 2iP";
         }
 
         function confirmNo() {
             document.getElementById("question").innerText = "Czy na pewno?";
-            document.getElementById("buttons").innerHTML = '<button class="btn yes" onclick="startHearts()">Tak!</button> <button class="btn no" onclick="breakHeart()">Tak, na pewno</button>';
+            document.getElementById("buttons").innerHTML = '<button class="btn yes" onclick="startHearts()">Nie</button> <button class="btn no" onclick="breakHeart()">Tak, na pewno</button>';
         }
 
         function breakHeart() {
             document.body.style.backgroundColor = "black";
             document.getElementById("heart").classList.add("heart-broken");
             document.getElementById("question").innerText = "💔";
-            // Ukrywanie przycisków
+
             document.getElementById("buttons").style.display = "none";
 
             for (let i = 0; i < 20; i++) {
